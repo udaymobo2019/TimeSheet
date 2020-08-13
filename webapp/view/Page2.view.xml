@@ -1,0 +1,128 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.pmTimesheetGrunt.controller.Page2" xmlns:ui="sap.ui.table"
+	xmlns:core="sap.ui.core" xmlns:uxap="sap.uxap" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<uxap:ObjectPageLayout showTitleInHeaderContent="false" showHeaderContent="false" showEditHeaderButton="fase" showFooter="true"
+		class="sapUiSizeCompact">
+		<uxap:headerTitle>
+			<uxap:ObjectPageHeader id="obj" objectTitle=" " objectSubtitle="" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="true"
+				isObjectSubtitleAlwaysVisible="true" showPlaceholder="true" objectImageURI="/build/uilibraries/content/static/image-canvas.svg">
+				<uxap:navigationBar>
+					<Bar>
+						<contentRight>
+							<!--<Button icon="sap-icon://decline" press="_onPageNavButtonPress"/>-->
+						</contentRight>
+						<contentMiddle>
+							<Title text="Display Confirmation"/>
+						</contentMiddle>
+						<contentRight/>
+					</Bar>
+				</uxap:navigationBar>
+				<uxap:actions/>
+				<uxap:breadCrumbsLinks/>
+			</uxap:ObjectPageHeader>
+		</uxap:headerTitle>
+		<uxap:headerContent/>
+		<uxap:sections>
+			<uxap:ObjectPageSection title="Items">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Items">
+						<uxap:blocks>
+							<Table id="tab2" width="auto" noDataText="No Data" mode="MultiSelect" selectionChange="radioButton" showSeparators="All" growing="true"
+								growingThreshold="20" growingScrollToLoad="true" class="sapUiDefaultMargin">
+								<infoToolbar>
+									<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+										<content>
+											<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</content>
+									</Toolbar>
+								</infoToolbar>
+								<headerToolbar/>
+								<columns>
+									<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Operation No." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Personnel No." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Person Name" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="12%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Confirmation No." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="13%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Confirmation Counter" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Actual Work" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="16%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Confirmation Text" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Posting Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+									<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<header>
+											<Text text="Status" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</header>
+										<footer/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem type="Active">
+										<cells>
+											<ObjectIdentifier title="{Operation1}" text="" titleActive="false" visible="true"/>
+											<Text text="{PersonnelNumber1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{EmployeeName1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{ConfirmationNumber1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{ConfirmationCounter1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{ActualWork1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{ConfirmationText1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{PostingDate1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											<Text text="{State}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar>
+				<content>
+					<Button text="Cancel Time Entry" press="canceltimeEnt" type="Emphasized" icon="" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false"/>
+					<ToolbarSpacer width=""/>
+					<Button text="Back to Time Sheet" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+						press="Back_to_timesheet"/>
+				</content>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>
+</mvc:View>

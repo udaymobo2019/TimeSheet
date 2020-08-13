@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog id="addcondialog1" class="sapUiSizeCompact" afterClose="dialogAfterclose" title="Information">
+		<content>
+			<Table id="tab3" items="{/tabdata1}" width="auto" noDataText="Select Details" mode="None" showSeparators="All" growing="true" growingThreshold="20"
+				growingScrollToLoad="true" class="sapUiResponsiveMargin">
+				<infoToolbar>
+					<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+						<content>
+							<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						</content>
+					</Toolbar>
+				</infoToolbar>
+				<headerToolbar>
+					<OverflowToolbar width="auto" height="auto" design="Solid" visible="true" enabled="true">
+						<content>
+							<Title text="" titleStyle="Auto" width="auto" textAlign="Begin" visible="true" wrapping="false"/>
+							<ToolbarSpacer width=""/>
+						</content>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="15%" hAlign="Center" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Message Type" width="auto" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="15%" hAlign="Center" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Operation No." width="auto" maxLines="1" wrapping="false" textAlign="Center" textDirection="Inherit" visible="true"/>
+						</header>
+						<footer/>
+					</Column>
+					<Column width="30%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+						<header>
+							<Text text="Message" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+						</header>
+						<footer/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active">
+						<cells>
+							<Text text="{Type2}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							<Text text="{Operation}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							<Input value="{Message}" type="Text" enabled="true" visible="true" width="80%" valueHelpOnly="false" maxLength="0"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button text="OK" press="tableok" type="Emphasized"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

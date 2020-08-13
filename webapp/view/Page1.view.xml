@@ -1,0 +1,439 @@
+<!--Time Sheet Main Screen-->
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.pmTimesheetGrunt.controller.Page1" xmlns="sap.m"
+	xmlns:uxap="sap.uxap" xmlns:unified="sap.ui.unified" xmlns:form="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Page title="Create Time Sheet" showHeader="true" showFooter="true" showNavButton="false">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button id="Dashboard" text="Back to Dashboard" icon="" press="HomeButton" tooltip="Back"/>
+				</contentLeft>
+			</Bar>
+		</customHeader>
+		<content>
+			<Wizard id="mainwiz" width="auto" height="auto" complete="_onWizardComplete" visible="true">
+				<steps>
+					<WizardStep id="wiz1" title="Select Date" icon="sap-icon://eam-work-order" validated="true" nextStep="true">
+						<content>
+							<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div"
+								visible="true" displayInline="false">
+								<items>
+									<form:Form width="100%" editable="true" visible="true">
+										<form:title/>
+										<form:formContainers>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true" label="By Date">
+														<!--	<form:label>
+															<Label text="By Date" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>-->
+														<form:fields>
+															<DatePicker id="cal" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="_updateText" class="sapUiSmallMarginBottom" width="80%"
+																placeholder=""/>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true" label="By Work Order Number">
+														<!--	<form:label>
+															<Label text="By Work Order Number" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>-->
+														<form:fields>
+															<Input id="work_inp" value="" type="Text" showValueHelp="false" enabled="true" visible="true" width="80%" valueHelpOnly="false"
+																editable="true" required="false" valueStateText="Invalid entry" maxLength="0" liveChange="_workorder_livechange"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true" label="By Work Center">
+														<form:fields>
+															<ComboBox id="workcent_inp" items="{ path: 'workorder>/WorkcentF4'}" placeholder="" editable="true" selectionChange="worcentre_livechange"
+																enabled="true" visible="true" width="80%" valueState="None" maxWidth="100%">
+																<items>
+																	<core:ListItem text="{workorder>Text}" enabled="true" key="{workorder>ImPlant}" additionalText=""/>
+																</items>
+															</ComboBox>
+														</form:fields>
+														<form:fields>
+															<Button text="Go" width="35%" type="Emphasized" press="Goooo"/>
+														<!--	<Button text="Clear" width="40%" type="Emphasized" press="clearing"/>-->
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true" label="">
+															<form:fields>
+															<ComboBox id="workcent_inpsss" items="{ path: 'workorder>/WorkcentF4'}" placeholder="" editable="true" selectionChange="worcentre_livechange"
+																enabled="true" visible="false" width="80%" valueState="None" maxWidth="100%">
+																<items>
+																	<core:ListItem text="{workorder>Text}" enabled="true" key="{workorder>ImPlant}" additionalText=""/>
+																</items>
+															</ComboBox>
+														</form:fields>
+														<form:fields>
+														<!--	<Button text="Go" width="35%" type="Emphasized" press="Goooo"/>-->
+															<Button text="Clear" width="35%" type="Emphasized" press="clearing"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+										</form:formContainers>
+										<form:layout>
+											<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+										</form:layout>
+									</form:Form>
+									<ToolbarSpacer width=""/>
+								</items>
+								<layoutData/>
+							</VBox>
+						</content>
+					</WizardStep>
+					<WizardStep id="wiz2" title="Work Orders" icon="sap-icon://eam-work-order" validated="true">
+						<content>
+							<ScrollContainer id="oScroll" height="225px" vertical="true">
+								<Table id="tab2" items="{path:'/tabdatas', templateShareable:true}" width="100%" noDataText="Select Date/Work Order Number" mode="None"
+									showSeparators="All" itemPress="tableBind">
+									<infoToolbar>
+										<Toolbar width="100%" height="auto" design="Auto" visible="true" enabled="true">
+											<content>
+												<Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</content>
+										</Toolbar>
+									</infoToolbar>
+									<headerToolbar/>
+									<columns>
+										<Column width="20%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+											<header>
+												<Text text="Work Order" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</header>
+											<footer/>
+										</Column>
+										<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+											<header>
+												<Text text="Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</header>
+											<footer/>
+										</Column>
+										<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+											<header>
+												<Text text="Created On" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</header>
+											<footer/>
+										</Column>
+										<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+											<header>
+												<Text text="Main Work Center" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</header>
+											<footer/>
+										</Column>
+										<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+											<header>
+												<Text text="Plant" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</header>
+											<footer/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem type="Active" highlight="{Status}">
+											<cells>
+												<ObjectIdentifier title="{WorkOrder}" titleActive="false" visible="true"/>
+												<Text text="{Description}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												<Text text="{CreatedOn}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												<Text text="{MainWkCntr}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												<Text text="{Plant}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</ScrollContainer>
+						</content>
+					</WizardStep>
+					<WizardStep id="wiz3" title="Operations" icon="" validated="false">
+						<content>
+							<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div"
+								visible="true" displayInline="false">
+								<items>
+									<Table id="tab1" items="{workorder>/oper}" width="100%" noDataText="Select Workorder" mode="None" showSeparators="All" growing="true"
+										growingThreshold="20" growingScrollToLoad="true">
+										<headerToolbar>
+											<OverflowToolbar>
+												<content>
+													<CheckBox id="noRemainingWorkid" text="No Remaining Work" selected="false"/>
+												</content>
+											</OverflowToolbar>
+										</headerToolbar>
+										<columns>
+											<Column width="10%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Final Confirmation" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="6%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="OpAc" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="WorkCenter" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Personnel Id" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Center" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Planned Hours" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Actual Hours" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="20%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Confirmation Text" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Set User Status" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Activity Type" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<CheckBox selected="{workorder>Empty2}" width="auto" visible="true"/>
+													<ObjectIdentifier title="{workorder>Operation1}" titleActive="false" visible="true"/>
+													<Text text="{workorder>WorkCenter1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+													<ComboBox id="personres" value="{workorder>PersonnelNo1}" width="auto"/>
+													<Text text="{workorder>PlannedHrs}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+													<TimePicker value="{workorder>Empty}" valueFormat="HH.mm" displayFormat="HH.mm" enabled="true" visible="true" width="auto"/>
+													<Input value="{workorder>ConfirmationText1}" type="Text" enabled="true" visible="true" width="100%" valueHelpOnly="false" maxLength="40"/>
+													<ComboBox id="workcenter1" value="{workorder>UserStatus1}" width="auto"/>
+													<!--<Text text="{workorder>ActivityType1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+													<Input value="{workorder>ActivityType1}" type="Text" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="6"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</items>
+								<layoutData/>
+							</HBox>
+						</content>
+					</WizardStep>
+				</steps>
+			</Wizard>
+		</content>
+		<footer>
+			<OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+				<content>
+					<Button id="disp_conf_btn" text="Display Confirmation" type="Emphasized" icon="" iconFirst="true" width="auto" enabled="true"
+						visible="{workorder>/Displayconfirmation}" iconDensityAware="false" press="_onButtonPress"/>
+					<ToolbarSpacer width=""/>
+					<Button id="savBtn" text="Save" press="save_btn" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false"/>
+				</content>
+			</OverflowToolbar>
+		</footer>
+		<headerContent/>
+	</Page>
+	<!--	<uxap:ObjectPageLayout showTitleInHeaderContent="false" showHeaderContent="true" showAnchorBar="false" showFooter="true"
+		subSectionLayout="TitleOnTop">
+		<uxap:headerContent/>
+		<uxap:headerTitle>
+			<uxap:ObjectPageHeader objectImageURI="sap-icon://eam-work-order" objectTitle="Time Sheet" objectSubtitle="Tcode: IW41" headerDesign="Dark"
+				objectImageShape="Circle" isObjectIconAlwaysVisible="true" isObjectTitleAlwaysVisible="true" isObjectSubtitleAlwaysVisible="true"
+				isActionAreaAlwaysVisible="true">
+				<uxap:actions>
+					<Button id="Dashboard" text="Back to Dashboard" icon="" press="HomeButton" tooltip="Back"/>
+				</uxap:actions>
+				<uxap:breadCrumbsLinks/>
+				<uxap:navigationBar/>
+			</uxap:ObjectPageHeader>
+		</uxap:headerTitle>
+		<uxap:sections>
+			<uxap:ObjectPageSection showTitle="true" title="" titleUppercase="true" visible="true">
+				<uxap:subSections>
+					<uxap:ObjectPageSubSection title="Timesheet" mode="Expanded">
+						<uxap:blocks>
+							<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div"
+								visible="true" displayInline="false">
+								<items>
+									<unified:Calendar id="cal" width="1150px" showWeekNumbers="false" select="handleCalendarSelect">
+										<unified:selectedDates/>
+										<unified:specialDates/>
+									</unified:Calendar>
+									<HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="62.986114501953125px" justifyContent="Start"
+										renderType="Div" visible="true" displayInline="false">
+										<items/>
+										<layoutData/>
+									</HBox>
+									<form:Form width="100%" editable="true" visible="true">
+										<form:title/>
+										<form:formContainers>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Work Order" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>
+														<form:fields>
+															<ComboBox id="combo1" editable="true" enabled="true" visible="true" width="100%" valueState="None" maxWidth="100%" change="comboboxSelect"
+																showSecondaryValues="true" filterSecondaryValues="true"></ComboBox>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Set User Status" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>
+														<form:fields>
+															<Input id="usr_st" value="" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+																required="false" valueStateText="Invalid entry" maxLength="0" editable="false"/>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="System Status" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>
+														<form:fields>
+															<Input id="sys_st" value="" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+																required="false" valueStateText="Invalid entry" maxLength="0" editable="false"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+											<form:FormContainer visible="true">
+												<form:formElements>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Work Center" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>
+														<form:fields>
+															<Input id="wrk" value="" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"
+																valueStateText="Invalid entry" maxLength="0" editable="false"/>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Activity Type" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+														</form:label>
+														<form:fields>
+															<Input id="act_typ" value=" " type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false"
+																editable="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+														</form:fields>
+													</form:FormElement>
+													<form:FormElement visible="true">
+														<form:label>
+															<Label text="Final Confirmation" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="false"/>
+														</form:label>
+														<form:fields>
+															<CheckBox id="finalConfirmationid" text="Final Confirmation" selected="false"/>
+															<CheckBox id="noRemainingWorkid" text="No Remaining Work" selected="false"/>
+														</form:fields>
+													</form:FormElement>
+												</form:formElements>
+												<form:title/>
+											</form:FormContainer>
+										</form:formContainers>
+										<form:layout>
+											<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+										</form:layout>
+									</form:Form>
+									<Table id="tab1" items="{/tabdata}" width="100%" noDataText="Select Workorder" mode="MultiSelect" showSeparators="All" growing="true"
+										growingThreshold="20" growingScrollToLoad="true">
+										<infoToolbar>
+											<Toolbar width="100%" height="auto" design="Auto" visible="true" enabled="true">
+												<content>
+													<Label text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</content>
+											</Toolbar>
+										</infoToolbar>
+										<headerToolbar/>
+										<columns>
+											<Column width="20%" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Operation" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Work Center" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Plant" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="10%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Hours" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+											<Column width="30%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+												<header>
+													<Text text="Confirmation Text" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+												</header>
+												<footer/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active">
+												<cells>
+													<ObjectIdentifier title="{Vornr1}" text="{Ltxa11}" titleActive="false" visible="true"/>
+													<Text text="{Arbpl1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+													<Text text="{Werks1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+													<Input value="" type="Text" enabled="true" visible="true" width="5%" valueHelpOnly="false" maxLength="0"/>
+													<Input value="{Empty1}" type="Text" enabled="true" visible="true" width="auto" valueHelpOnly="false" maxLength="0"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+									<ToolbarSpacer width=""/>
+								</items>
+								<layoutData/>
+							</VBox>
+						</uxap:blocks>
+						<uxap:moreBlocks/>
+						<uxap:actions/>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+				<uxap:customAnchorBarButton/>
+			</uxap:ObjectPageSection>
+		</uxap:sections>
+		<uxap:footer>
+			<OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+				<content>
+					<Button id="disp_conf_btn" text="Display Confirmations" type="Emphasized" icon="" iconFirst="true" width="auto" enabled="true"
+						visible="false" iconDensityAware="false" press="_onButtonPress"/>
+					<ToolbarSpacer width=""/>
+					<Button id="savBtn" text="Confirm" press="save_btn" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false"/>
+				</content>
+			</OverflowToolbar>
+		</uxap:footer>
+	</uxap:ObjectPageLayout>-->
+</mvc:View>
